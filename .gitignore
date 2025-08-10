@@ -1,0 +1,16 @@
+# .gitignore
+target/
+out/
+bin/
+**/*.iml
+.idea/
+.project
+.settings/
+.classpath
+.mvn/wrapper/maven-wrapper.jar
+.DS_Store
+logs/
+# Node (in case you add a frontend later)
+node_modules/
+# VS Code
+.vscode/
