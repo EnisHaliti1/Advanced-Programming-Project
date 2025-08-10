@@ -1,0 +1,73 @@
+services:
+  # Databases
+  mongo-patient:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_patient_data:/data/db
+
+  mysql-doctor:
+    image: mysql:latest
+    ports:
+      - "3309:3306"   # host:container
+    environment:
+      MYSQL_ROOT_PASSWORD: abc123
+    volumes:
+      - mysql_doctor_data:/var/lib/mysql
+
+  mysql-appointment:
+    image: mysql:latest
+    ports:
+      - "3310:3306"   # host:container
+    environment:
+      MYSQL_ROOT_PASSWORD: abc123
+    volumes:
+      - mysql_appointment_data:/var/lib/mysql
+
+  # Microservices
+  patient-service:
+    image: enishaliti12/patient-service
+    depends_on:
+      - mongo-patient
+    ports:
+      - "8080:8080"
+    environment:
+      MONGO_DB_HOST: mongo-patient
+      MONGO_DB_PORT: 27017
+      SERVER_PORT: 8080
+
+  doctor-service:
+    image: enishaliti12/doctor-service
+    depends_on:
+      - mysql-doctor
+    ports:
+      - "8083:8083"
+    environment:
+      MYSQL_DB_USERNAME: root
+      MYSQL_DB_PASSWORD: abc123
+      MYSQL_DB_HOST: mysql-doctor
+      MYSQL_DB_PORT: 3306      # container port
+      SERVER_PORT: 8083
+
+  appointment-service:
+    image: enishaliti12/appointment-service
+    depends_on:
+      - mysql-appointment
+      - patient-service
+      - doctor-service
+    ports:
+      - "8084:8084"
+    environment:
+      MYSQL_DB_USERNAME: root
+      MYSQL_DB_PASSWORD: abc123
+      MYSQL_DB_HOST: mysql-appointment
+      MYSQL_DB_PORT: 3306      # container port
+      PATIENT_SERVICE_BASEURL: patient-service:8080
+      DOCTOR_SERVICE_BASEURL: doctor-service:8083
+      SERVER_PORT: 8084
+
+volumes:
+  mongodb_patient_data:
+  mysql_doctor_data:
+  mysql_appointment_data:
