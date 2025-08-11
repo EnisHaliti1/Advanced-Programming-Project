@@ -67,6 +67,20 @@ services:
       DOCTOR_SERVICE_BASEURL: doctor-service:8083
       SERVER_PORT: 8084
 
+  api-gateway:
+    image: enishaliti12/api-gateway:latest
+    depends_on:
+      - patient-service
+      - doctor-service
+      - appointment-service
+    ports:
+      - "8085:8085"
+    environment:
+      # point to service names inside the compose network
+      PATIENT_SERVICE_BASEURL: patient-service:8080
+      DOCTOR_SERVICE_BASEURL: doctor-service:8083
+      APPOINTMENT_SERVICE_BASEURL: appointment-service:8084
+
 volumes:
   mongodb_patient_data:
   mysql_doctor_data:
