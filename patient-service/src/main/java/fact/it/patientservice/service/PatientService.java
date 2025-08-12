@@ -40,6 +40,7 @@ public class PatientService {
                 .orElse(null);
     }
 
+
     private PatientResponse mapToPatientResponse(Patient patient) {
         return PatientResponse.builder()
                 .id(patient.getId())

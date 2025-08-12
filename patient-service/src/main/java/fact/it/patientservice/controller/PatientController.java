@@ -1,5 +1,6 @@
 package fact.it.patientservice.controller;
 
+
 import fact.it.patientservice.dto.PatientRequest;
 import fact.it.patientservice.dto.PatientResponse;
 import fact.it.patientservice.service.PatientService;
@@ -33,4 +34,5 @@ public class PatientController {
     public List<PatientResponse> getAllPatients() {
         return patientService.getAllPatients();
     }
+
 }
