@@ -40,6 +40,23 @@ public class PatientService {
                 .orElse(null);
     }
 
+    public boolean updatePatient(String nationalId, PatientRequest req) {
+        return patientRepository.findByNationalId(nationalId)
+                .map(p -> {
+                    p.setFirstName(req.getFirstName());
+                    p.setLastName(req.getLastName());
+                    p.setEmail(req.getEmail());
+                    p.setPhone(req.getPhone());
+                    patientRepository.save(p);
+                    return true;
+                })
+                .orElse(false);
+    }
+
+    public boolean deleteByNationalId(String nationalId) {
+        return patientRepository.deleteByNationalId(nationalId) > 0;
+    }
+
 
     private PatientResponse mapToPatientResponse(Patient patient) {
         return PatientResponse.builder()

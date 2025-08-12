@@ -35,4 +35,19 @@ public class PatientController {
         return patientService.getAllPatients();
     }
 
+    @PutMapping("/{nationalId}")
+    @ResponseStatus(HttpStatus.OK)
+    public boolean updatePatient(
+            @PathVariable String nationalId,
+            @RequestBody PatientRequest patientRequest) {
+        return patientService.updatePatient(nationalId, patientRequest);
+    }
+
+    @DeleteMapping("/{nationalId}")
+    @ResponseStatus(HttpStatus.OK)
+    public boolean deletePatient(@PathVariable String nationalId) {
+        return patientService.deleteByNationalId(nationalId);
+    }
+
+
 }

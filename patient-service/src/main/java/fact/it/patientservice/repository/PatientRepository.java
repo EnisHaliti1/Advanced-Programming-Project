@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface PatientRepository extends MongoRepository<Patient, String> {
     Optional<Patient> findByNationalId(String nationalId);
+    long deleteByNationalId(String nationalId);
 }
