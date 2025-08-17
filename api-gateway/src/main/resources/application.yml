@@ -9,6 +9,18 @@ logging:
     reactor.netty: INFO
 
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENTID}
+            client-secret: ${GOOGLE_CLIENTSECRET}
+            scope: openid, profile, email
+      resourceserver:
+        jwt:
+          issuer-uri: https://accounts.google.com
+          jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
   cloud:
     gateway:
       routes:
@@ -37,6 +49,25 @@ spring:
             - Method=GET
           filters:
             - SetPath=/api/patient/all
+
+        # PUT /patients/{nationalId} -> patient-service /api/patient/{nationalId}
+        - id: patient-update
+          uri: http://${PATIENT_SERVICE_BASEURL:localhost:8080}
+          predicates:
+            - Path=/patients/{nationalId}
+            - Method=PUT
+          filters:
+            - RewritePath=/patients/(?<id>.*),/api/patient/${id}
+
+        # DELETE /patients/{nationalId} -> patient-service /api/patient/{nationalId}
+        - id: patient-delete
+          uri: http://${PATIENT_SERVICE_BASEURL:localhost:8080}
+          predicates:
+            - Path=/patients/{nationalId}
+            - Method=DELETE
+          filters:
+            - RewritePath=/patients/(?<id>.*),/api/patient/${id}
+
 
         # -------- DOCTOR-SERVICE (MySQL @ 8083) --------
         - id: doctor-routes
