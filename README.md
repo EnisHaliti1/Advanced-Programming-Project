@@ -10,6 +10,8 @@ All traffic flows through a Spring Cloud Gateway, with Google OAuth2 (JWT) secur
 Ready to explore how it’s structured and how to run it? Let’s dive in together.
 
 
+
+
 ## Made by
 - **Enis Haliti**: https://github.com/EnisHaliti1 
 
@@ -121,7 +123,9 @@ Key points:
   docker compose up -d
 ```
 Check containers: docker compose ps
+
 You should see: mongo-patient, mysql-doctor, mysql-appointment, patient-service, doctor-service, appointment-service, api-gateway
+
 2. Ports overview
 - API Gateway: http://localhost:8085
 - patient-service: 8080 (behind gateway)
