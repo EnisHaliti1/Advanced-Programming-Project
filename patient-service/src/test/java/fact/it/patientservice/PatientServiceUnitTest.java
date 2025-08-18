@@ -44,7 +44,7 @@ class PatientServiceUnitTest {
                 .firstName("Alice")
                 .lastName("Jensen")
                 .email("alice@example.com")
-                .phone("+3212345678")
+                .phone("+32123456789")
                 .build();
         when(patientRepository.findAll()).thenReturn(List.of(p));
 
