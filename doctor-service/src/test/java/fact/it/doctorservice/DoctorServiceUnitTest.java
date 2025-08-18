@@ -95,6 +95,7 @@ class DoctorServiceUnitTest {
         verify(timeSlotRepository, times(1)).save(slot);
     }
 
+    // slot reserverd
     @Test
     void testReserveSlot_AlreadyReserved() {
         TimeSlot slot = TimeSlot.builder()
