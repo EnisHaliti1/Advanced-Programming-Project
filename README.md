@@ -1,4 +1,4 @@
-<img width="1297" height="587" alt="image" src="https://github.com/user-attachments/assets/8bbdf8e2-0f54-431a-8648-704dcd75215e" />![mebelike](https://github.com/user-attachments/assets/4b546fa2-ea72-46aa-b0f2-a3cb84d9367f)
+![mebelike](https://github.com/user-attachments/assets/4b546fa2-ea72-46aa-b0f2-a3cb84d9367f)
 # Clinic Booking Microservices (Spring Boot)
 
 This project is a cloud-ready microservices backend for a small clinic. It manages patients, doctors & time slots, and appointments across three Spring Boot services:
