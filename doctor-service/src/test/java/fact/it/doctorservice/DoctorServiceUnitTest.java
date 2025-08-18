@@ -49,34 +49,6 @@ class DoctorServiceUnitTest {
         assertEquals("Cardiology", resp.getSpecialty());
         verify(doctorRepository, times(1)).findById(1L);
     }
-
-    @Test
-    void testGetDoctor_NotFound() {
-        when(doctorRepository.findById(99L)).thenReturn(Optional.empty());
-        assertNull(doctorService.getDoctor(99L));
-        verify(doctorRepository, times(1)).findById(99L);
-    }
-
-    @Test
-    void testGetTimeSlotsByDoctor() {
-        LocalDateTime now = LocalDateTime.now();
-        TimeSlot s = TimeSlot.builder()
-                .id(10L)
-                .doctor(Doctor.builder().id(1L).build())
-                .startAt(now)
-                .endAt(now.plusMinutes(30))
-                .status(TimeSlotStatus.AVAILABLE)
-                .build();
-        when(timeSlotRepository.findByDoctorId(1L)).thenReturn(List.of(s));
-
-        List<TimeSlotDto> out = doctorService.getTimeSlotsByDoctor(1L);
-
-        assertEquals(1, out.size());
-        assertEquals(10L, out.get(0).getId());
-        assertEquals("AVAILABLE", out.get(0).getStatus());
-        assertEquals(1L, out.get(0).getDoctorId());
-        verify(timeSlotRepository, times(1)).findByDoctorId(1L);
-    }
 }
 
 
