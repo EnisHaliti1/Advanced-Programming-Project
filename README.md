@@ -1,4 +1,4 @@
-![mebelike](https://github.com/user-attachments/assets/4b546fa2-ea72-46aa-b0f2-a3cb84d9367f)
+<img width="1297" height="587" alt="image" src="https://github.com/user-attachments/assets/8bbdf8e2-0f54-431a-8648-704dcd75215e" />![mebelike](https://github.com/user-attachments/assets/4b546fa2-ea72-46aa-b0f2-a3cb84d9367f)
 # Clinic Booking Microservices (Spring Boot)
 
 This project is a cloud-ready microservices backend for a small clinic. It manages patients, doctors & time slots, and appointments across three Spring Boot services:
@@ -200,27 +200,89 @@ Key points:
 
 <img width="1317" height="868" alt="image" src="https://github.com/user-attachments/assets/8e7c17ba-e711-4129-ac98-ba4c85532bb8" />
 
-Let's go ahead and delete now the patient that we wanted to delete:
+  Let's go ahead and delete now the patient that we wanted to delete:
 
 <img width="1297" height="587" alt="image" src="https://github.com/user-attachments/assets/ba08b0e2-2036-45ee-9302-13b8f3161adc" />
 
-And now the patient is deleted.
-
-
-
-
-
-
-
-
-6. a
-7. a
-8. a
-9. a
-10. 
-
+  And now the patient is deleted.
 
 ---
 
+## Postman endpoints screenshots
+
+  #### **Patient**
+
+  POST /patients
+  
+  <img width="1312" height="567" alt="image" src="https://github.com/user-attachments/assets/db84069c-62ef-4f31-bc8c-71022339cfd3" />
 
 
+  GET /patients/all
+
+  <img width="1326" height="912" alt="image" src="https://github.com/user-attachments/assets/07d91b32-8960-4eb4-ab55-6b65e077e0a9" />
+
+
+  GET /patients/?nationalId
+
+  <img width="1315" height="922" alt="image" src="https://github.com/user-attachments/assets/b33a135d-c9fe-469c-a61b-2b6f675677f5" />
+
+
+  PUT /patients/{nationalId}
+
+  <img width="1312" height="928" alt="image" src="https://github.com/user-attachments/assets/7352dc2e-b8b0-42e2-98b1-6977c2f255cd" />
+  <img width="1333" height="801" alt="image" src="https://github.com/user-attachments/assets/7a16caa6-8b07-4074-8fa8-bddbd0357936" />
+
+
+  DELETE /patients/{nationalId}
+
+  <img width="1327" height="921" alt="image" src="https://github.com/user-attachments/assets/1329cfc2-d4fd-4e6a-8c13-06d733d32fba" />
+
+  Here we can see that the patient with nationalId "MICH123" is deleted
+
+  <img width="1352" height="708" alt="image" src="https://github.com/user-attachments/assets/f4e14879-e39a-40d0-9bfb-f717652441a6" />
+
+
+  #### **Doctor**
+
+  
+  GET /doctors/{id}
+
+  <img width="1387" height="923" alt="image" src="https://github.com/user-attachments/assets/b2a65ab5-2d60-4521-bc5b-5094c930ff88" />
+
+
+  GET /doctors/{id}/timeslots
+
+  <img width="1371" height="928" alt="image" src="https://github.com/user-attachments/assets/e9aba495-ba18-43dc-bb77-f4b9f5f80bcd" />
+
+
+  POST /timeslots/reserve
+
+  <img width="1367" height="932" alt="image" src="https://github.com/user-attachments/assets/2c958d5e-4c6f-4462-bd7c-8ac523705f9d" />
+
+
+
+  #### **Appointment**
+
+  POST /appointments
+
+  If you attempt to book an appointment for a time slot that is already reserved (e.g., timeslotId = 2), the booking is rejected.
+
+  The doctor-service reports the slot is already reserved, and the appointment-service returns:
+
+  ```bash
+    Appointment booking failed
+  ```
+
+  <img width="1375" height="928" alt="image" src="https://github.com/user-attachments/assets/f0661476-fef3-4e4f-b0f4-daedf20b884e" />
+
+  Conversely, when you select a time slot with status AVAILABLE, the booking succeeds, and the appointment-service responds:
+
+  ```bash
+    Appointment booked successfully
+    (I’ll demonstrate the successful booking flow live during the presentation.)
+  ```
+  
+
+  GET /appointments
+
+  <img width="1373" height="931" alt="image" src="https://github.com/user-attachments/assets/e6c3b333-3ff0-4810-bdc8-a776564016e4" />
