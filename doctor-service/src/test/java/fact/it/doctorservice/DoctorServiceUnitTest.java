@@ -35,20 +35,14 @@ class DoctorServiceUnitTest {
     @Mock
     private TimeSlotRepository timeSlotRepository;
 
+
     @Test
-    void testGetDoctor_Found() {
-        Doctor d = Doctor.builder()
-                .id(1L).name("Dr. Alice Jensen").specialty("Cardiology").build();
-        when(doctorRepository.findById(1L)).thenReturn(Optional.of(d));
-
-        DoctorResponse resp = doctorService.getDoctor(1L);
-
-        assertNotNull(resp);
-        assertEquals(1L, resp.getId());
-        assertEquals("Dr. Alice Jensen", resp.getName());
-        assertEquals("Cardiology", resp.getSpecialty());
-        verify(doctorRepository, times(1)).findById(1L);
+    void testGetDoctor_NotFound() {
+        when(doctorRepository.findById(99L)).thenReturn(Optional.empty());
+        assertNull(doctorService.getDoctor(99L));
+        verify(doctorRepository, times(1)).findById(99L);
     }
+
 }
 
 
