@@ -36,7 +36,6 @@ class PatientServiceUnitTest {
         verify(patientRepository, times(1)).save(any(Patient.class));
     }
 
-    // all patients
     @Test
     void testGetAllPatients() {
         Patient p = Patient.builder()

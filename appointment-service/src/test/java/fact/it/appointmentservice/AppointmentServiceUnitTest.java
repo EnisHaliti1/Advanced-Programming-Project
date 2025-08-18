@@ -139,4 +139,6 @@ class AppointmentServiceUnitTests {
         assertEquals("A2", out.get(1).getAppointmentNumber());
         verify(appointmentRepository, times(1)).findAll();
     }
+
+    // gg
 }
