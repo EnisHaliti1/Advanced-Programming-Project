@@ -156,6 +156,7 @@ Most /patients/** and /appointments/** endpoints require a Google ID token:
     - Use the ID token as Bearer <id_token> (Authorization tab).
 
     Then click on:
+    
     <img width="248" height="102" alt="image" src="https://github.com/user-attachments/assets/10def0da-79e7-459d-bba8-cb092ddd3e45" />
     
 
