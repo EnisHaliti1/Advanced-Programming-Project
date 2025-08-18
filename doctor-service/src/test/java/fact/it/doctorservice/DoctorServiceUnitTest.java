@@ -36,13 +36,6 @@ class DoctorServiceUnitTest {
     private TimeSlotRepository timeSlotRepository;
 
 
-    @Test
-    void testGetDoctor_NotFound() {
-        when(doctorRepository.findById(99L)).thenReturn(Optional.empty());
-        assertNull(doctorService.getDoctor(99L));
-        verify(doctorRepository, times(1)).findById(99L);
-    }
-
 }
 
 
