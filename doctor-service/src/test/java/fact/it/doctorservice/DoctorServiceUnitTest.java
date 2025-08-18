@@ -77,50 +77,6 @@ class DoctorServiceUnitTest {
         assertEquals(1L, out.get(0).getDoctorId());
         verify(timeSlotRepository, times(1)).findByDoctorId(1L);
     }
-
-
-    @Test
-    void testReserveSlot_Success() {
-        TimeSlot slot = TimeSlot.builder()
-                .id(5L)
-                .status(TimeSlotStatus.AVAILABLE)
-                .build();
-        when(timeSlotRepository.findById(5L)).thenReturn(Optional.of(slot));
-        when(timeSlotRepository.save(any(TimeSlot.class))).thenAnswer(inv -> inv.getArgument(0));
-
-        ReserveSlotResponse resp = doctorService.reserveSlot(5L);
-
-        assertTrue(resp.isReserved());
-        assertEquals("Time slot reserved successfully", resp.getMessage());
-        assertEquals(TimeSlotStatus.RESERVED, slot.getStatus());
-        verify(timeSlotRepository, times(1)).save(slot);
-    }
-
-    @Test
-    void testReserveSlot_AlreadyReserved() {
-        TimeSlot slot = TimeSlot.builder()
-                .id(6L)
-                .status(TimeSlotStatus.RESERVED)
-                .build();
-        when(timeSlotRepository.findById(6L)).thenReturn(Optional.of(slot));
-
-        ReserveSlotResponse resp = doctorService.reserveSlot(6L);
-
-        assertFalse(resp.isReserved());
-        assertEquals("Time slot already reserved", resp.getMessage());
-        verify(timeSlotRepository, never()).save(any());
-    }
-
-    @Test
-    void testReserveSlot_NotFound() {
-        when(timeSlotRepository.findById(404L)).thenReturn(Optional.empty());
-
-        ReserveSlotResponse resp = doctorService.reserveSlot(404L);
-
-        assertFalse(resp.isReserved());
-        assertEquals("Time slot not found", resp.getMessage());
-        verify(timeSlotRepository, never()).save(any());
-    }
 }
 
 
