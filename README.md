@@ -210,7 +210,7 @@ Key points:
 
 ## Postman endpoints screenshots
 
-  #### **Patient**
+  ### **Patient**
 
   POST /patients
   
@@ -242,7 +242,7 @@ Key points:
   <img width="1352" height="708" alt="image" src="https://github.com/user-attachments/assets/f4e14879-e39a-40d0-9bfb-f717652441a6" />
 
 
-  #### **Doctor**
+  ### **Doctor**
 
   
   GET /doctors/{id}
@@ -261,7 +261,7 @@ Key points:
 
 
 
-  #### **Appointment**
+  ### **Appointment**
 
   POST /appointments
 
