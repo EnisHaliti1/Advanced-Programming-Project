@@ -127,17 +127,24 @@ Check containers: docker compose ps
 You should see: mongo-patient, mysql-doctor, mysql-appointment, patient-service, doctor-service, appointment-service, api-gateway
 
 2. Ports overview
+```bash
 - API Gateway: http://localhost:8085
 - patient-service: 8080 (behind gateway)
 - doctor-service: 8083 (behind gateway)
 - appointment-service: 8084 (behind gateway)
 - MongoDB: 27017, MySQL: 3309 (doctor), 3310 (appointment)
+```
+
 3. Smoke test (public routes)
 <img width="927" height="412" alt="image" src="https://github.com/user-attachments/assets/9fcd3fe9-269b-4284-a69f-b02e1b4d5bc1" />
 <img width="1283" height="797" alt="image" src="https://github.com/user-attachments/assets/cff08094-f55f-46da-87e5-06820928aeb0" />
+
 4. Protected routes (JWT required)
+   
 Most /patients/** and /appointments/** endpoints require a Google ID token:
+
 **Postman**
+
   - Authorization → Type: OAuth 2.0 → Get New Access Token
     <img width="1243" height="406" alt="image" src="https://github.com/user-attachments/assets/6e17be37-e7b3-4a9a-8c65-acec1df213de" />
     <img width="807" height="567" alt="image" src="https://github.com/user-attachments/assets/2d123f75-9b71-4889-9d0b-6e090e8eb4fd" />
