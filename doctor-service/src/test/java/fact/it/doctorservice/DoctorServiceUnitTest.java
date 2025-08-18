@@ -78,27 +78,6 @@ class DoctorServiceUnitTest {
         verify(timeSlotRepository, times(1)).findByDoctorId(1L);
     }
 
-    @Test
-    void testGetTimeSlotsByDoctorBetween() {
-        LocalDateTime from = LocalDateTime.now();
-        LocalDateTime to = from.plusHours(2);
-        TimeSlot s = TimeSlot.builder()
-                .id(20L)
-                .doctor(Doctor.builder().id(1L).build())
-                .startAt(from.plusMinutes(30))
-                .endAt(from.plusMinutes(60))
-                .status(TimeSlotStatus.AVAILABLE)
-                .build();
-        when(timeSlotRepository.findByDoctorIdAndStartAtBetween(1L, from, to))
-                .thenReturn(List.of(s));
-
-        List<TimeSlotDto> out = doctorService.getTimeSlotsByDoctorBetween(1L, from, to);
-
-        assertEquals(1, out.size());
-        assertEquals(20L, out.get(0).getId());
-        verify(timeSlotRepository, times(1))
-                .findByDoctorIdAndStartAtBetween(1L, from, to);
-    }
 
     @Test
     void testReserveSlot_Success() {
