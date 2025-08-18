@@ -148,14 +148,17 @@ Most /patients/** and /appointments/** endpoints require a Google ID token:
   - Authorization → Type: OAuth 2.0 → Get New Access Token
     <img width="1243" height="406" alt="image" src="https://github.com/user-attachments/assets/6e17be37-e7b3-4a9a-8c65-acec1df213de" />
     <img width="807" height="567" alt="image" src="https://github.com/user-attachments/assets/2d123f75-9b71-4889-9d0b-6e090e8eb4fd" />
-    Then click on:
-    <img width="248" height="102" alt="image" src="https://github.com/user-attachments/assets/10def0da-79e7-459d-bba8-cb092ddd3e45" />
-    
+
     - Callback URL: https://www.getpostman.com/oauth2/callback
     - Auth URL: https://accounts.google.com/o/oauth2/auth
     - Access Token URL: https://oauth2.googleapis.com/token
     - Scope: openid profile email
     - Use the ID token as Bearer <id_token> (Authorization tab).
+
+    Then click on:
+    <img width="248" height="102" alt="image" src="https://github.com/user-attachments/assets/10def0da-79e7-459d-bba8-cb092ddd3e45" />
+    
+
 
 5. a
 
