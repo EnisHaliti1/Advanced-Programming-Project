@@ -161,7 +161,63 @@ Most /patients/** and /appointments/** endpoints require a Google ID token:
     
 
 
-5. a
+5. Authentication (Google OAuth2)
+
+This project secures non-public routes at the API Gateway using Google ID tokens (JWT). Public routes (e.g., GET /doctors/**) need no token; everything else requires Authorization
+
+- Configure Google OAuth2
+  
+  1. Create a GCP project in console.cloud.google.com
+  2. OAuth consent screen → External → fill app info → Scopes: openid, profile, email → Test users: add your Google account.
+  3. Credentials → Create Credentials → OAuth client ID → Web application.
+    - Add authorized redirect URI: https://www.getpostman.com/oauth2/callback (for Postman).
+  4. Copy your Client ID and Client Secret.
+
+- Gateway security
+
+  SecurityConfig allows public: GET /doctors/**, and requires JWT for everything else.
+
+  <img width="972" height="373" alt="image" src="https://github.com/user-attachments/assets/6989e3eb-b962-4db2-9d84-057e0c112ea4" />
+
+- Get an ID token in Postman (as shown above)
+  
+  Complete the Google sign-in. In the token popup, copy the ID Token (JWT). Click Use Token.
+
+- Call protected endpoints
+
+**Without authentication:**
+
+<img width="1298" height="553" alt="image" src="https://github.com/user-attachments/assets/371d0a4f-01e9-42c8-a151-38bd48fcfa71" />
+
+Or try and delete a patient:
+
+<img width="1327" height="566" alt="image" src="https://github.com/user-attachments/assets/09752d70-1efb-4184-b3c6-1e309e0b7097" />
+
+
+**With authentication:**
+
+<img width="570" height="303" alt="image" src="https://github.com/user-attachments/assets/aa5f6615-9131-4893-8692-ff72ce71bda3" />
+
+<img width="1317" height="868" alt="image" src="https://github.com/user-attachments/assets/8e7c17ba-e711-4129-ac98-ba4c85532bb8" />
+
+Let's go ahead and delete now the patient that we wanted to delete:
+
+<img width="1297" height="587" alt="image" src="https://github.com/user-attachments/assets/ba08b0e2-2036-45ee-9302-13b8f3161adc" />
+
+And now the patient is deleted.
+
+
+
+
+
+
+
+
+6. a
+7. a
+8. a
+9. a
+10. 
 
 
 ---
