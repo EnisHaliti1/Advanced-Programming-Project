@@ -9,10 +9,12 @@ This project is a cloud-ready microservices backend for a small clinic. It manag
 All traffic flows through a Spring Cloud Gateway, with Google OAuth2 (JWT) securing sensitive endpoints. The project ships with CI/CD via GitHub Actions (builds & pushes Docker images) and Docker Compose for local deployment.
 Ready to explore how it’s structured and how to run it? Let’s dive in together.
 
+
 ## Made by
 - **Enis Haliti**: https://github.com/EnisHaliti1 
 
 ---
+
 
 ## Architecture
 
@@ -53,7 +55,8 @@ Ready to explore how it’s structured and how to run it? Let’s dive in togeth
   - GitHub Actions (CI/CD for building & pushing images)
 
 ### Architecture Diagram
-![Uploading DeploymentSchema.png…]()
+<img width="1031" height="738" alt="DeploymentSchema" src="https://github.com/user-attachments/assets/28acbaaf-4501-4ae5-a1c2-5eea15904c4f" />
+
 **Figure:** Deployment diagram illustrating the request flow through the **API Gateway** to the three microservices and their databases.  
 Key points:
 - All clients (Postman / browser) call the **Gateway (8085)**.
@@ -62,13 +65,4 @@ Key points:
 - **doctor-service** (8083) persists to **MySQL** and exposes **time slot reservation**.
 - **appointment-service** (8084) orchestrates bookings using **WebClient** to call patient- and doctor-service, then stores the appointment in MySQL.
 - Services are containerized and wired with **Docker Compose**; base URLs & DB settings are provided via environment variables.
-
-
-
-
-POST /health
-![image](https://github.com/user-attachments/assets/1ceadc80-5098-4695-b256-0f34b683111c)
-
-PUT /health
-![image](https://github.com/user-attachments/assets/a2c7a04e-ce8c-40e4-a348-59b65315782a)
 
