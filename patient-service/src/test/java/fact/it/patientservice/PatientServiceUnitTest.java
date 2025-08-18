@@ -36,6 +36,7 @@ class PatientServiceUnitTest {
         verify(patientRepository, times(1)).save(any(Patient.class));
     }
 
+    // all patients
     @Test
     void testGetAllPatients() {
         Patient p = Patient.builder()
@@ -44,7 +45,7 @@ class PatientServiceUnitTest {
                 .firstName("Alice")
                 .lastName("Jensen")
                 .email("alice@example.com")
-                .phone("+32123456789")
+                .phone("+3212345678")
                 .build();
         when(patientRepository.findAll()).thenReturn(List.of(p));
 
