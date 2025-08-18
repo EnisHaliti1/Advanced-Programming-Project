@@ -112,28 +112,28 @@ Key points:
 
 ## Quick Start (Run Locally)
 
-**Prerequisites**
-- Docker & Docker Compose installed
-- Postman or curl for testing
+  **Prerequisites**
+  - Docker & Docker Compose installed
+  - Postman or curl for testing
   
 1. **Clone & start**
-```bash
-  git clone https://github.com/EnisHaliti1/Advanced-Programming-Project.git
-  cd Advanced-Programming-Project
-  docker compose up -d
-```
-Check containers: docker compose ps
+  ```bash
+    git clone https://github.com/EnisHaliti1/Advanced-Programming-Project.git
+    cd Advanced-Programming-Project
+    docker compose up -d
+  ```
+  Check containers: docker compose ps
 
-You should see: mongo-patient, mysql-doctor, mysql-appointment, patient-service, doctor-service, appointment-service, api-gateway
+  You should see: mongo-patient, mysql-doctor, mysql-appointment, patient-service, doctor-service, appointment-service, api-gateway
 
 2. Ports overview
-```bash
-- API Gateway: http://localhost:8085
-- patient-service: 8080 (behind gateway)
-- doctor-service: 8083 (behind gateway)
-- appointment-service: 8084 (behind gateway)
-- MongoDB: 27017, MySQL: 3309 (doctor), 3310 (appointment)
-```
+  ```bash
+  - API Gateway: http://localhost:8085
+  - patient-service: 8080 (behind gateway)
+  - doctor-service: 8083 (behind gateway)
+  - appointment-service: 8084 (behind gateway)
+  - MongoDB: 27017, MySQL: 3309 (doctor), 3310 (appointment)
+  ```
 
 3. Smoke test (public routes)
 <img width="927" height="412" alt="image" src="https://github.com/user-attachments/assets/9fcd3fe9-269b-4284-a69f-b02e1b4d5bc1" />
@@ -141,21 +141,21 @@ You should see: mongo-patient, mysql-doctor, mysql-appointment, patient-service,
 
 4. Protected routes (JWT required)
    
-Most /patients/** and /appointments/** endpoints require a Google ID token:
+  Most /patients/** and /appointments/** endpoints require a Google ID token:
 
-**Postman**
+  **Postman**
 
   - Authorization → Type: OAuth 2.0 → Get New Access Token
     <img width="1243" height="406" alt="image" src="https://github.com/user-attachments/assets/6e17be37-e7b3-4a9a-8c65-acec1df213de" />
     <img width="807" height="567" alt="image" src="https://github.com/user-attachments/assets/2d123f75-9b71-4889-9d0b-6e090e8eb4fd" />
 
-    - Callback URL: https://www.getpostman.com/oauth2/callback
-    - Auth URL: https://accounts.google.com/o/oauth2/auth
-    - Access Token URL: https://oauth2.googleapis.com/token
-    - Scope: openid profile email
-    - Use the ID token as Bearer <id_token> (Authorization tab).
+      - Callback URL: https://www.getpostman.com/oauth2/callback
+      - Auth URL: https://accounts.google.com/o/oauth2/auth
+      - Access Token URL: https://oauth2.googleapis.com/token
+      - Scope: openid profile email
+      - Use the ID token as Bearer <id_token> (Authorization tab).
 
-    Then click on:
+      Then click on:
     
     <img width="248" height="102" alt="image" src="https://github.com/user-attachments/assets/10def0da-79e7-459d-bba8-cb092ddd3e45" />
     
@@ -163,38 +163,38 @@ Most /patients/** and /appointments/** endpoints require a Google ID token:
 
 5. Authentication (Google OAuth2)
 
-This project secures non-public routes at the API Gateway using Google ID tokens (JWT). Public routes (e.g., GET /doctors/**) need no token; everything else requires Authorization
+  This project secures non-public routes at the API Gateway using Google ID tokens (JWT). Public routes (e.g., GET /doctors/**) need no token; everything else requires Authorization
 
-- Configure Google OAuth2
+  - Configure Google OAuth2
+    
+    1. Create a GCP project in console.cloud.google.com
+    2. OAuth consent screen → External → fill app info → Scopes: openid, profile, email → Test users: add your Google account.
+    3. Credentials → Create Credentials → OAuth client ID → Web application.
+      - Add authorized redirect URI: https://www.getpostman.com/oauth2/callback (for Postman).
+    4. Copy your Client ID and Client Secret.
   
-  1. Create a GCP project in console.cloud.google.com
-  2. OAuth consent screen → External → fill app info → Scopes: openid, profile, email → Test users: add your Google account.
-  3. Credentials → Create Credentials → OAuth client ID → Web application.
-    - Add authorized redirect URI: https://www.getpostman.com/oauth2/callback (for Postman).
-  4. Copy your Client ID and Client Secret.
+  - Gateway security
 
-- Gateway security
-
-  SecurityConfig allows public: GET /doctors/**, and requires JWT for everything else.
+    SecurityConfig allows public: GET /doctors/**, and requires JWT for everything else.
 
   <img width="972" height="373" alt="image" src="https://github.com/user-attachments/assets/6989e3eb-b962-4db2-9d84-057e0c112ea4" />
 
-- Get an ID token in Postman (as shown above)
+  - Get an ID token in Postman (as shown above)
+    
+    Complete the Google sign-in. In the token popup, copy the ID Token (JWT). Click Use Token.
   
-  Complete the Google sign-in. In the token popup, copy the ID Token (JWT). Click Use Token.
+  - Call protected endpoints
 
-- Call protected endpoints
-
-**Without authentication:**
+  **Without authentication:**
 
 <img width="1298" height="553" alt="image" src="https://github.com/user-attachments/assets/371d0a4f-01e9-42c8-a151-38bd48fcfa71" />
-
-Or try and delete a patient:
+  
+  Or try and delete a patient:
 
 <img width="1327" height="566" alt="image" src="https://github.com/user-attachments/assets/09752d70-1efb-4184-b3c6-1e309e0b7097" />
 
 
-**With authentication:**
+  **With authentication:**
 
 <img width="570" height="303" alt="image" src="https://github.com/user-attachments/assets/aa5f6615-9131-4893-8692-ff72ce71bda3" />
 
